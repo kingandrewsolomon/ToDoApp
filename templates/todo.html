@@ -1,0 +1,32 @@
+{{ define "todoTimer" }}
+<todo-timer id="Todo{{ .ID}}" class="todoItem">
+    <div slot="todo-delete" class="todoDelete" hx-delete="/delete/{{.ID}}" hx-target="#display" hx-swap="innerHTML">
+        <img src="https://icons.veryicon.com/png/o/construction-tools/coca-design/delete-189.png">
+    </div>
+    <div slot="todo-title">{{.Title}}</div>
+    <div slot="todo-elapsed" value="{{ div .TimeElapsed 1e6 }}">{{div .TimeElapsed 1e6 }}</div>
+    <div slot="todo-amount">{{.TimeEstimate}}</div>
+</todo-timer>
+
+{{ end }}
+
+{{ define "editTodo" }}
+<todo-timer id="Todo{{ .ID}}" class="todoItem">
+    <div slot="todo-delete" class="todoDelete" hx-delete="/delete/{{.ID}}" hx-target="#display" hx-swap="innerHTML">
+        <img src="https://icons.veryicon.com/png/o/construction-tools/coca-design/delete-189.png">
+    </div>
+    <div slot="todo-title">
+        <input id="editTitle" type="text" name="editTitle" value="{{.Title}}" required>
+    </div>
+    <div slot="todo-elapsed" value="{{ div .TimeElapsed 1e6 }}">{{div .TimeElapsed 1e6 }}</div>
+    <div slot="todo-amount">
+        <input id="editAmount" type="text" name="editAmount" value="{{.TimeEstimate}}" required>
+    </div>
+</todo-timer>
+
+<todo-control hx-swap-oob="true" id="edit{{.ID}}" hx-post="/editTodo?id={{.ID}}"
+    hx-include="[id='editTitle'], [id='editAmount']" hx-target="#Todo{{.ID}}" hx-swap="outerHTML">
+    <button>Done</button>
+</todo-control>
+
+{{ end }}

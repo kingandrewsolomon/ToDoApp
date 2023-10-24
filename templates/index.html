@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew's Super Awesome ToDo App!</title>
+    <!-- <script src="https://unpkg.com/htmx.org@1.9.6"></script> -->
+    <script src="/static/js/htmx.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/main.js"></script>
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- <template id="todo-template">
+        <slot name="todo-delete">DELETE</slot>
+        <slot name="todo-title">TODO TITLE</slot>
+        <slot name="todo-elapsed">TIME ELAPSED</slot>/
+        <slot name="todo-amount">TIME AMOUNT</slot>
+    </template> -->
+    <h3>List of To Do's</h3>
+    <div id="display">
+        {{ block "display" . }}
+        {{end}}
+    </div>
+    <div>
+        <label>What do you need to do:</label>
+        <div class="todoUser">
+
+            <div class="todoInput">
+                <input id="todoTitle" type="text" name="todoTitle" required />
+                <input id="todoTime" type="number" name="todoTime" required />
+                <select name="todoUnit" id="todoUnit">
+                    <option value="h">Hours</option>
+                    <option value="m">Minutes</option>
+                    <option value="s">Seconds</option>
+                </select>
+            </div>
+
+            <div class="todoButton">
+                <button hx-post="/addTodo" hx-include="[id='todoTitle'], [id='todoTime'], [id='todoUnit']"
+                    hx-target="#display" hx-swap="innerHTML" hx-on::after-request="clearInputs()">
+                    Create ToDo
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <script src="/static/js/todo_timer.js"></script>
+</footer>
+
+</html>

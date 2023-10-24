@@ -1,0 +1,39 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+li {
+    display: flex;
+}
+
+todo-control {
+    display: flex;
+    margin-left: 1rem;
+}
+
+timer-control {
+    display: flex;
+    margin-left: 1rem;
+}
+
+.todoItem {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.todoDelete {
+    width: 2rem;
+}
+
+.todoUser {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    cursor: pointer;
+    width: 100%;
+}

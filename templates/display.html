@@ -1,0 +1,18 @@
+{{ define "display"}}
+<ul>
+    {{ range . }}
+    <li>
+        {{ block "todoTimer" . }}
+        {{end}}
+        <todo-control id="edit{{.ID}}" hx-post="/editTodo?id={{.ID}}" hx-target="#Todo{{.ID}}" hx-swap="outerHTML">
+            <button>Edit</button>
+        </todo-control>
+        <timer-control id="{{.ID}}" hx-post="/timeIt?id={{.ID}}" hx-target="#Todo{{.ID}}" hx-swap="outerHTML">
+            <button>Start</button>
+        </timer-control>
+    </li>
+    {{ else }}
+    <li>Nothing to do</li>
+    {{ end }}
+</ul>
+{{ end }}
